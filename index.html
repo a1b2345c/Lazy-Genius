@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LazyGenius</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+    <header>
+        <h1>LazyGenius</h1>
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#upload">Upload your notes!</a></li>
+            <li><a href="#quiz">Quiz yourself!</a></li>
+            <li><a href="#assistant">Virtual Assistant</a></li>
+          </ul>
+        </nav>
+      </header>
+    
+      <section id="home" class = "start">
+        <h1>Welcome to LazyGenius</h1>
+        <h2>Let's make studying even easier</h2>
+        <p>Upload your own studynotes with other users, create quizzes and quiz yourself, and get help from our AI assistant.</p>
+        <a href = "#upload" class = "button"> Let's get started! </a>
+      </section>
+    
+      <section class="features">
+        <div class="feature">
+          <h3>📚Upload & share study notes</h3>
+          <p>Organize and share your study materials with the community. Access notes from other students.</p>
+        </div>
+
+        <div class="feature">
+          <h3>🧠 Custome Quizzes & Flashcards</h3>
+          <p></p>Transform your study notes into interactive queastionaries and flashcard to test your knowledge effectively </p>
+        </div>
+
+        <div class="feature">
+          <h3> AI Study Assistant</h3>
+          <p>Don't be afraid to ask anything to our study virtual asistant. It will give you personalized study recommendations and answers</p>
+        </div>
+
+      </section>
+
+      <section id="upload" class="upload-section">
+        <h2 class ="section-tittle"> Upload Your Notes</h2>
+        <div class ="upload-container">
+          <form id="upload-form" class="upload-form">
+            <input type="text" placeholder ="Note Title" required>
+            <input type="text" placeholder ="Subject/Course" required>
+            <textarea placeholder="Add a description of your notes" required></textarea>
+            <label for="file-upload">Choose a file:</label>
+            <input type="file" id="file-upload" accept=".pdf, .docx, .txt" required>
+            <button type="submit">Upload Notes</button>
+          </form>
+          </div>
+      </section>
+
+
+  
+    <section id="subjects" class="subject-browser-container">
+        <h2 style="text-align: center; font-size: 2rem; color: #e6f1ff; margin-bottom: 20px;">Explore Subjects</h2>
+        <p style="text-align: center; color: #8892b0; max-width: 800px; margin: 0 auto 40px;">
+            Click on any subject to browse detailed explanations, key concepts, and examples.
+        </p>
+        
+        <div class="subject-tabs">
+            <button class="tab-btn active" onclick="showSubject('math')">
+                <i class="fas fa-square-root-alt"></i> Mathematics
+            </button>
+            <button class="tab-btn" onclick="showSubject('physics')">
+                <i class="fas fa-atom"></i> Physics
+            </button>
+            <button class="tab-btn" onclick="showSubject('chemistry')">
+                <i class="fas fa-flask"></i> Chemistry
+            </button>
+            <button class="tab-btn" onclick="showSubject('biology')">
+                <i class="fas fa-dna"></i> Biology
+            </button>
+        </div>
+        
+        <div id="subject-browser" class="subject-browser">
+            <!-- Content loaded dynamically by JavaScript -->
+        </div>
+    </section>
+
+    <script>
+        // Comprehensive Knowledge Base
+        const knowledgeBase = {
+            math: [
+                {
+                    title: "Algebra Fundamentals",
+                    description: "The branch of mathematics dealing with symbols and the rules for manipulating them.",
+                    concepts: [
+                        "Linear equations: Solve for x in equations like 2x + 5 = 15",
+                        "Quadratic equations: Solutions using factoring or quadratic formula",
+                        "Polynomials: Operations and factoring techniques",
+                        "Functions: Domain, range, and graphing"
+                    ],
+                    example: "Solve for x: 3x - 7 = 14\n1. Add 7 to both sides: 3x = 21\n2. Divide both sides by 3: x = 7"
+                },
+                {
+                    title: "Calculus Essentials",
+                    description: "The mathematical study of continuous change.",
+                    concepts: [
+                        "Limits: Approaching values without necessarily reaching them",
+                        "Derivatives: Rates of change and tangent lines",
+                        "Integrals: Accumulation and area under curves",
+                        "Fundamental Theorem of Calculus"
+                    ],
+                    example: "Find the derivative of f(x) = x² + 3x\nSolution: f'(x) = 2x + 3\n(Power rule: d/dx[x^n] = nx^(n-1))"
+                },
+                {
+                    title: "Geometry Principles",
+                    description: "The study of shapes, sizes, and properties of space.",
+                    concepts: [
+                        "Euclidean geometry: Points, lines, planes, angles",
+                        "Triangles: Types, congruence, similarity",
+                        "Circles: Arcs, chords, sectors",
+                        "Coordinate geometry: Plotting on Cartesian plane"
+                    ],
+                    example: "Area of a circle: A = πr²\nCircumference: C = 2πr\nFor r = 5 units:\nA = 25π ≈ 78.54 sq units\nC = 10π ≈ 31.42 units"
+                }
+            ],
+            physics: [
+                {
+                    title: "Classical Mechanics",
+                    description: "The study of motion and forces acting on objects.",
+                    concepts: [
+                        "Newton's Laws of Motion",
+                        "Kinematics: Position, velocity, acceleration",
+                        "Work, Energy, and Power",
+                        "Momentum and Collisions"
+                    ],
+                    example: "Newton's Second Law: F = ma\nA 5kg object with 10N force:\na = F/m = 10/5 = 2 m/s²"
+                },
+                {
+                    title: "Electromagnetism",
+                    description: "The physics of electric and magnetic fields.",
+                    concepts: [
+                        "Coulomb's Law: Electric force between charges",
+                        "Ohm's Law: V = IR",
+                        "Magnetic fields and forces",
+                        "Electromagnetic induction"
+                    ],
+                    example: "Ohm's Law: V = IR\nFor a 9V battery and 3Ω resistor:\nI = V/R = 9/3 = 3 Amperes"
+                },
+                {
+                    title: "Thermodynamics",
+                    description: "The study of heat, work, and energy transfer.",
+                    concepts: [
+                        "Laws of Thermodynamics",
+                        "Heat engines and efficiency",
+                        "Entropy and disorder",
+                        "Phase transitions"
+                    ],
+                    example: "First Law: ΔU = Q - W\nWhere:\nΔU = change in internal energy\nQ = heat added to system\nW = work done by system"
+                }
+            ],
+            chemistry: [
+                {
+                    title: "Atomic Structure",
+                    description: "The composition and behavior of atoms.",
+                    concepts: [
+                        "Protons, neutrons, electrons",
+                        "Electron configurations",
+                        "Periodic trends",
+                        "Quantum mechanical model"
+                    ],
+                    example: "Carbon-12 atom:\n6 protons, 6 neutrons, 6 electrons\nElectron configuration: 1s² 2s² 2p²"
+                },
+                {
+                    title: "Chemical Bonding",
+                    description: "How atoms combine to form compounds.",
+                    concepts: [
+                        "Ionic vs covalent bonds",
+                        "Lewis structures",
+                        "Molecular geometry (VSEPR)",
+                        "Intermolecular forces"
+                    ],
+                    example: "Water (H₂O) molecule:\n- Polar covalent bonds\n- Bent molecular shape\n- Hydrogen bonding between molecules"
+                },
+                {
+                    title: "Stoichiometry",
+                    description: "Quantitative relationships in chemical reactions.",
+                    concepts: [
+                        "Mole concept",
+                        "Balancing equations",
+                        "Limiting reactants",
+                        "Percent yield"
+                    ],
+                    example: "2H₂ + O₂ → 2H₂O\n2 moles H₂ reacts with 1 mole O₂\nto produce 2 moles H₂O"
+                }
+            ],
+            biology: [
+                {
+                    title: "Cell Biology",
+                    description: "The study of cell structure and function.",
+                    concepts: [
+                        "Prokaryotic vs eukaryotic cells",
+                        "Organelles and their functions",
+                        "Cell membrane structure",
+                        "Cellular transport"
+                    ],
+                    example: "Mitochondria:\n- Powerhouse of the cell\n- Site of ATP production\n- Contains its own DNA"
+                },
+                {
+                    title: "Genetics",
+                    description: "The science of heredity and variation.",
+                    concepts: [
+                        "Mendelian inheritance",
+                        "DNA structure and replication",
+                        "Protein synthesis",
+                        "Genetic engineering"
+                    ],
+                    example: "Punnett Square for eye color:\nB (brown, dominant) vs b (blue, recessive)\nBb × Bb → 75% brown, 25% blue"
+                },
+                {
+                    title: "Evolution",
+                    description: "The process of biological change over time.",
+                    concepts: [
+                        "Natural selection",
+                        "Evidence for evolution",
+                        "Speciation",
+                        "Phylogenetics"
+                    ],
+                    example: "Peppered moth evolution:\n- Pre-industrial: Light-colored moths common\n- Post-industrial: Dark-colored moths thrived\n(Demonstrates natural selection)"
+                }
+            ]
+        };
+
+        // Display Subjects
+        function showSubject(subject) {
+            const browser = document.getElementById('subject-browser');
+            browser.innerHTML = '';
+            
+            // Update active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase().includes(subject));
+            });
+
+            // Create cards for each topic
+            knowledgeBase[subject].forEach(topic => {
+                const card = document.createElement('div');
+                card.className = 'subject-card';
+                card.innerHTML = `
+                    <h3><i class="fas fa-${getIcon(subject)}"></i> ${topic.title}</h3>
+                    <p>${topic.description}</p>
+                    <ul class="concept-list">
+                        ${topic.concepts.map(concept => `<li>${concept}</li>`).join('')}
+                    </ul>
+                    <div class="example-box">
+                        <strong>Example:</strong><br>${topic.example.replace(/\n/g, '<br>')}
+                    </div>
+                `;
+                browser.appendChild(card);
+            });
+        }
+
+        // Get appropriate icon for each subject
+        function getIcon(subject) {
+            const icons = {
+                math: 'square-root-alt',
+                physics: 'atom',
+                chemistry: 'flask',
+                biology: 'dna'
+            };
+            return icons[subject] || 'book';
+        }
+
+        // Initialize with Math
+        showSubject('math');
+    </script>
+</body>
+</html>
+K
+
+      
+
+      <section id="quiz" class="quiz-section">
+        <h2 class="section-tittle"> Quiz Yourself</h2>
+        <div class="quiz-container">
+            <h3>Create a New Quiz </h3>
+            <div class="quiz-options">
+              <div class="quiz-option" data-type="multiple-choice">
+                <h4>Multiple Choice</h4>
+                <p>Choose the correct answer from the options provided.</p>
+                </div>
+        
+                <div class="quiz-option" data-type="flashcards">
+                  <h4>Flashcards</h4>
+                  <p>Test your knowledge with flashcards.</p>
+                </div>
+
+                <div id="quiz-creator" style="display: none;">
+                  <formd id="quiz-form">
+                    <label for="quiz-question">Enter your question:</label>
+                    <input type="text" id="quiz-question" required>
+                    <label for="quiz-answer">Enter the answer:</label>
+                    <input type="text" id="quiz-answer" required>
+                    <button type="submit">Create Quiz</button>
+                </div>
+            
+            <div class="quiz-options"></div>
+          <form id="quiz-form">
+            <label for="quiz-question">Enter your question:</label>
+            <input type="text" id="quiz-question" required>
+            <label for="quiz-answer">Enter the answer:</label>
+            <input type="text" id="quiz-answer" required>
+            <button type="submit">Create Quiz</button>
+          </form>
+
+          
+
+
+
+
+      </section>
+        <h2 class ="section"></h2>
+        <section id="assistant" class="assistant-section">
+          <h2 class="section-title">Virtual Assistant</h2>
+          <div class="assistant-container">
+              <div class="chat-container" id="chatbox-messages">
+                  <!-- Chat messages will appear here automatically -->
+              </div>
+              <form id="chatbox-form" class="chat-input">
+                  <input type="text" id="chatbox-input" placeholder="Ask me anything about your studies...">
+                  <button type="submit" id="chatbox-send"><i class="fas fa-paper-plane"></i></button>
+              </form>
+          </div>
+      </section>
+
+
+
+      </section>
+
+
+      </div>
+  
+      <script src="script.js"></script>    
+    </body>
+    </html>
